@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-all.js"
+></script>
+<style>
+p{background-color:tan;}
+input{margin-bottom:1em;}
+
+</style>
+</head>
+<body>
+<p>Show .xls, .xlsx, .csv files...</p>
+<input type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" ID="fileSelect" runat="server" />  
+
+
+<p>Only show Excel (.xlsx) files...</p>
+<input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ID="fileSelect" runat="server" />  
+
+<p>Only show Excel (.xls) files...</p>
+<input type="file" accept="application/vnd.ms-excel" ID="fileSelect" runat="server" />  
+
+
+<p>Only show image files...</p>
+<input type="file" accept="image/*" ID="fileSelect" runat="server" />  
+
+
+<p>Only show text files...</p>
+<input type="file" accept="text/plain" ID="fileSelect" runat="server" />  
+
+<p>Only show html files...</p>
+<input type="file" accept="text/html" ID="fileSelect" runat="server" />  
+
+<p>Only show video files...</p>
+<input type="file" accept="video/*" ID="fileSelect" runat="server" />  
+
+<p>Only show audio files...</p>
+<input type="file" accept="audio/*" ID="fileSelect" runat="server" />  
+
+<p>Only show .WAV files...</p>
+<input type="file" accept=".wav" ID="fileSelect" runat="server" />  
+
+<p>Only show .PDF files...</p>
+<input type="file" accept=".pdf" ID="fileSelect" runat="server" /> 
+</body>
+</html>
