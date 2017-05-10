@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>	
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style type="text/css">
+	#map{
+		position: static;
+		width: 400px;
+		height: 300px;
+		display: none;
+	}
+	#summary{
+		display: none;
+	}
+</style>
+
+</head>
+<body >
+
+<div id="map" ></div>
+<div id="summary"></div>
+<button onclick="initMap()">Get Directions</button>
+<script type="text/javascript">
+function initMap() {
+	new AutocompleteDirectionsHandler();
+}
+
+function AutocompleteDirectionsHandler(){
+	var mapId = document.getElementById('map');
+	var summaryId = document.getElementById('summary');
+	mapId.style.display = 'block';
+	summaryId.style.display = 'block';
+	var map = new google.maps.Map(mapId, {
+    	mapTypeControl: false,
+    	center: {lat:-33.8688, lng:151.2195},
+    	zoom: 12
+  	});
+    this.originPlaceId = 'ChIJaay65lgUrjsR7RFSyHzHAh0';
+  	this.destinationPlaceId = 'ChIJZ_hTxoRsrjsR-So1cnwXt6I';
+  	this.map = map;
+  	this.travelMode = 'DRIVING';
+  	this.directionsService = new google.maps.DirectionsService;
+  	this.directionsDisplay = new google.maps.DirectionsRenderer;
+  	this.directionsDisplay.setMap(map);
+  	this.route(summaryId);
+}
+AutocompleteDirectionsHandler.prototype.route = function(summaryId) {
+  	if (!this.originPlaceId || !this.destinationPlaceId) {
+    	return;
+  	}
+  	var me = this;
+	this.directionsService.route({	
+		origin: {'placeId': this.originPlaceId},
+    	destination: {'placeId': this.destinationPlaceId},
+    	travelMode: this.travelMode,
+    	optimizeWaypoints: true
+	  	}, function(response, status) {
+	    if (status === 'OK') {
+	      	me.directionsDisplay.setDirections(response);
+	      	var routes = response.routes[0].legs[0];
+			/*var summary = "<strong>Summary:</strong> You have travelled from <b><i>" + routes.start_address + "</i></b> to <b><i>";
+			summary += routes.end_address + ".</i></b> Covered <b><i> ";
+			summary += routes.distance.text + "</i></b> within <b><i>" + routes.duration.text + "</i></b>.";*/
+			var summary = '<div><strong>Estimated Distance:</strong>'+routes.distance.text+'</div>';
+			summary += '<div><strong>Estimated Time:</strong>'+routes.duration.text+'</div>';
+			summaryId.innerHTML = summary;
+	    } else {
+	      window.alert('Directions request failed due to ' + status);
+	    }
+	});
+    
+};
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr_ytwnQJeYqIs0hzgnxcstdfZRtK0p9U&libraries=places"
+ async defer></script>
+
+</body>
+</html>
